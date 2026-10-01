@@ -1,5 +1,7 @@
 import Navbar from './components/Navbar.jsx'
 import CategoryBar from './components/CategoryBar.jsx'
+import Gallery from './components/Gallery.jsx'
+import Footer from './components/Footer.jsx'
 
 function App() {
   return (
@@ -39,7 +41,9 @@ function App() {
       </header>
       <main className="container">
         <CategoryBar />
+        <Gallery />
       </main>
+      <Footer />
     </>
   )
 }
