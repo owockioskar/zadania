@@ -8,6 +8,10 @@ import Footer from './components/Footer.jsx'
 import photos from './data/photos.json'
 import './App.css'
 
+function usunZdjecie(id) {
+  setZdjecia(zdjecia.filter(z => z.id !== id))
+}
+
 function App() {
   const [zdjecia, setZdjecia] = useState(photos)
   const [aktywnaKategoria, setAktywnaKategoria] = useState('wszystkie')
@@ -56,12 +60,13 @@ function App() {
             Nie znaleziono zdjęć w tej kategorii.
           </div>
         )}
-        <Gallery zdjecia={widoczne}/>
+        <Gallery zdjecia={widoczne} onUsun={usunZdjecie} />
       </main>
       <Footer />
       <AddPhotoModal />
       <FiltersOffcanvas aktywna={aktywnaKategoria} onWybierz={setAktywnaKategoria}/>
     </>
+    
   )
 }
 
