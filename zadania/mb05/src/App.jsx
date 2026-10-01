@@ -17,6 +17,12 @@ function dodajZdjecie(nowe) {
   setZdjecia([...zdjecia, { ...nowe, id: noweId, favorite: false }])
 }
 
+function przelaczUlubione(id) {
+  setZdjecia(
+    zdjecia.map(z => (z.id === id ? { ...z, favorite: !z.favorite } : z))
+  )
+}
+
 function App() {
   const [zdjecia, setZdjecia] = useState(photos)
   const [aktywnaKategoria, setAktywnaKategoria] = useState('wszystkie')
@@ -68,7 +74,7 @@ function App() {
             Nie znaleziono zdjęć w tej kategorii.
           </div>
         )}
-        <Gallery zdjecia={widoczne} onUsun={usunZdjecie} />
+        <Gallery zdjecia={widoczne} onUsun={usunZdjecie} onPrzelacz={przelaczUlubione}/>
       </main>
       <Footer />
       <AddPhotoModal onDodaj={dodajZdjecie} />
