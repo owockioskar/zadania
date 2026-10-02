@@ -13,6 +13,7 @@ function App() {
 
   const [szukaj, setSzukaj] = useState('')
   const [rosnaco, setRosnaco] = useState(true)
+  const [status, setStatus] = useState(null)
 
   const widoczne = kursy
     .map((kurs, index) => ({ kurs, numer: index + 1 }))
@@ -36,8 +37,10 @@ function App() {
 
     if (kurs !== undefined) {
       console.log(kurs)
+      setStatus({ typ: 'sukces', tresc: `${imienazwisko} zapisany(-a) na kurs: ${kurs}` })
     } else {
       console.log('Nieprawidłowy numer kursu')
+      setStatus({ typ: 'blad', tresc: 'Nieprawidłowy numer kursu' })
     }
   }
 
@@ -64,6 +67,10 @@ function App() {
         </button>
       </div>
 
+      <p className="text-body-secondary">
+        Znaleziono {widoczne.length} z {kursy.length} kursów
+      </p>
+
       <ol>
         {widoczne.map(({ kurs, numer }) => (
           <li key={numer} value={numer}>
@@ -71,6 +78,12 @@ function App() {
           </li>
         ))}
       </ol>
+
+      {status && (
+        <div className={`alert alert-${status.typ === 'sukces' ? 'success' : 'danger'}`}>
+          {status.tresc}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
