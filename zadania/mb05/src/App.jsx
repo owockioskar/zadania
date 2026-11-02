@@ -6,6 +6,7 @@ import AddPhotoModal from './components/AddPhotoModal.jsx'
 import FiltersOffcanvas from './components/FiltersOffcanvas.jsx'
 import Footer from './components/Footer.jsx'
 import './App.css'
+import ZdjecieDnia from './components/ZdjecieDnia.jsx'
 
 function usunZdjecie(id) {
   setZdjecia(zdjecia.filter(z => z.id !== id))
@@ -115,11 +116,11 @@ function App() {
         )}
         <Gallery zdjecia={widoczne} onUsun={usunZdjecie} onPrzelacz={przelaczUlubione}/>
       </main>
-      <Footer />
+      <Footer/>
       <AddPhotoModal onDodaj={dodajZdjecie} />
       <FiltersOffcanvas aktywna={aktywnaKategoria} onWybierz={setAktywnaKategoria}/>
+      <ZdjecieDnia/>
     </>
-    
   )
 }
 
