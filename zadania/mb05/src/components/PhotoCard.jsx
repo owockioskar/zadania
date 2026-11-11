@@ -1,4 +1,9 @@
-function PhotoCard({ id, title, description, category, image, alt, favorite, onUsun, onPrzelacz}) {
+import { Link } from 'react-router-dom'
+
+const NAZWA_KATEGORII = { gory: 'Góry', morze: 'Morze', miasto: 'Miasto' }
+const KOLOR_KATEGORII = { gory: 'success', morze: 'primary', miasto: 'dark' }
+
+function PhotoCard({ id, title, description, category, image, alt, favorite, onUsuw, onPrzelacz }) {
   return (
     <div className="card h-100 shadow-sm">
       <img src={image} className="card-img-top" alt={alt} />
@@ -12,34 +17,20 @@ function PhotoCard({ id, title, description, category, image, alt, favorite, onU
             aria-label={favorite ? 'Usuń z ulubionych' : 'Dodaj do ulubionych'}
             aria-pressed={favorite}
           >
-            {favorite ? (
-              <i className="bi bi-star-fill text-warning" />
-            ) : (
-              <i className="bi bi-star" />
-            )}
+            {favorite ? <i className="bi bi-star-fill text-warning" /> : <i className="bi bi-star" />}
           </button>
         </div>
-
         <p>
-          <span className="badge text-bg-secondary">{category}</span>
+          <span className={`badge text-bg-${KOLOR_KATEGORII[category]}`}>
+            {NAZWA_KATEGORII[category]}
+          </span>
         </p>
-
-        <p className="card-text flex-grow-1">{description}</p>
-
-        <div className="d-flex gap-2 mt-3">
-          <button
-            type="button"
-            className="btn btn-outline-primary btn-sm flex-grow-1"
-            data-bs-toggle="modal"
-            data-bs-target={`#photoModal-${id}`}
-          >
+        <p className="card-text text-body-secondary">{description}</p>
+        <div className="d-flex gap-2 mt-auto">
+          <Link className="btn btn-outline-primary flex-fill" to={`/zdjecie/${id}`}>
             Powiększ
-          </button>
-          <button
-            type="button"
-            className="btn btn-outline-danger btn-sm"
-            onClick={onUsun}
-          >
+          </Link>
+          <button type="button" className="btn btn-outline-danger" onClick={onUsuw}>
             Usuń
           </button>
         </div>
