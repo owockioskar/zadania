@@ -27,6 +27,7 @@ function App() {
   const [zdjecia, setZdjecia] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [aktywnaKategoria, setAktywnaKategoria] = useState('wszystkie')
 
   useEffect(() => {
     async function pobierzZdjecia() {
@@ -35,6 +36,7 @@ function App() {
         if (!odpowiedz.ok) throw new Error('Błąd serwera: ' + odpowiedz.status)
         const dane = await odpowiedz.json()
         setZdjecia(dane)
+        setError(null)
       } catch (err) {
         setError(err.message)
       } finally {
@@ -43,8 +45,6 @@ function App() {
     }
     pobierzZdjecia()
   }, [])
-
-  const [aktywnaKategoria, setAktywnaKategoria] = useState('wszystkie')
 
   const widoczne = aktywnaKategoria === 'wszystkie' ? zdjecia : zdjecia.filter(z => z.category === aktywnaKategoria)
 
